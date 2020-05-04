@@ -2341,6 +2341,7 @@ trait Provisioning {
 		// in OCIS there is no admin user and in oC10 there are issues when
 		// sending the username in lowercase in the auth but in uppercase in
 		// the URL see https://github.com/owncloud/core/issues/36822
+		$user = $this->getActualUsername($user);
 		if (OcisHelper::isTestingOnOcis()) {
 			$requestingUser = $this->getActualUsername($user);
 			$requestingPassword = $this->getPasswordForUser($requestingUser);
@@ -2529,6 +2530,7 @@ trait Provisioning {
 	 * @throws \Exception
 	 */
 	public function userHasBeenAddedToGroup($user, $group) {
+		$user = $this->getActualUsername($user);
 		$this->addUserToGroup($user, $group, null, true);
 	}
 

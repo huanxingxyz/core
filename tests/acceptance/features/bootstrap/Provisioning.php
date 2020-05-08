@@ -3861,6 +3861,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function adminSetsUserQuotaToUsingTheProvisioningApi($user, $quota) {
+		$user = $this->getActualUsername($user);
 		$body
 			= [
 			'key' => 'quota',

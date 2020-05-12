@@ -1093,6 +1093,7 @@ trait Provisioning {
 	public function theAdministratorCreatesUserPasswordGroupUsingTheProvisioningApi(
 		$user, $password, $group
 	) {
+		$user = $this->getActualUsername($user);
 		$password = $this->getActualPassword($password);
 		$bodyTable = new TableNode(
 			[['userid', $user], ['password', $password], ['groups[]', $group]]

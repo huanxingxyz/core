@@ -1753,6 +1753,7 @@ trait Provisioning {
 	public function adminRetrievesTheInformationOfUserUsingTheProvisioningApi(
 		$user
 	) {
+		$user = $this->getActualUsername($user);
 		$this->retrieveUserInformationAsAdminUsingProvisioningApi(
 			$user
 		);
@@ -2097,6 +2098,7 @@ trait Provisioning {
 	public function addUserToCreatedUsersList(
 		$user, $password, $displayName = null, $email = null, $shouldExist = true
 	) {
+		$user = $this->getActualUsername($user);
 		$user = $this->normalizeUsername($user);
 		$userData = [
 			"password" => $password,
@@ -2157,6 +2159,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function rememberThatUserIsNotExpectedToExist($user) {
+		$user = $this->getActualUsername($user);
 		$user = $this->normalizeUsername($user);
 		if (\array_key_exists($user, $this->createdUsers)) {
 			$this->createdUsers[$user]['shouldExist'] = false;
@@ -2377,6 +2380,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function userShouldBelongToGroup($user, $group) {
+		$user = $this->getActualUsername($user);
 		$this->theAdministratorGetsAllTheGroupsOfUser($user);
 		$respondedArray = $this->getArrayOfGroupsResponded($this->response);
 		\sort($respondedArray);
@@ -2418,6 +2422,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function userShouldNotBelongToGroup($user, $group) {
+		$user = $this->getActualUsername($user);
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/users/$user/groups";
 		$this->response = HttpRequestHelper::get(
 			$fullUrl, $this->getAdminUsername(), $this->getAdminPassword()
@@ -2439,6 +2444,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function groupShouldNotContainUser($group, $username) {
+		$username = $this->getActualUsername($username);
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/groups/$group";
 		$this->response = HttpRequestHelper::get(
 			$fullUrl, $this->getAdminUsername(), $this->getAdminPassword()
@@ -3295,6 +3301,7 @@ trait Provisioning {
 	public function adminMakesUserSubadminOfGroupUsingTheProvisioningApi(
 		$user, $group
 	) {
+		$user = $this->getActualUsername($user);
 		$this->userMakesUserASubadminOfGroupUsingTheProvisioningApi(
 			$this->getAdminUsername(), $user, $group
 		);

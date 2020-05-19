@@ -2546,7 +2546,6 @@ trait Provisioning {
 	 */
 	public function userHasBeenAddedToGroup($user, $group) {
 		$user = $this->getActualUsername($user);
-		$group = $this->getActualUsername($group);
 		$this->addUserToGroup($user, $group, null, true);
 	}
 
@@ -2703,7 +2702,6 @@ trait Provisioning {
 	 * @throws \Exception
 	 */
 	public function groupHasBeenCreated($group) {
-		$group = $this->getActualUsername($group);
 		$this->createTheGroup($group);
 		$this->groupShouldExist($group);
 	}

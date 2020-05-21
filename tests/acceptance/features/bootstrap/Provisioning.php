@@ -1837,6 +1837,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function userShouldExist($user) {
+		$user = $this->getActualUsername($user);
 		Assert::assertTrue(
 			$this->userExists($user),
 			"User '$user' should exist but does not exist"
@@ -1851,6 +1852,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function userShouldNotExist($user) {
+		$user = $this->getActualUsername($user);
 		Assert::assertFalse(
 			$this->userExists($user),
 			"User '$user' should not exist but does exist"
@@ -3666,6 +3668,7 @@ trait Provisioning {
 	 * @return void
 	 */
 	public function theEmailAddressOfUserShouldBe($user, $expectedEmailAddress) {
+		$user = $this->getActualUsername($user);
 		$this->retrieveUserInformationAsAdminUsingProvisioningApi($user);
 		$this->theEmailAddressReturnedByTheApiShouldBe($expectedEmailAddress);
 	}

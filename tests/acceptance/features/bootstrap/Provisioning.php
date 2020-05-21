@@ -1523,7 +1523,7 @@ trait Provisioning {
 				. $result->getStatusCode() . " " . $result->getBody()
 			);
 		}
-		$this->createdUsers[$user]["displayname"] = $displayname;
+		$this->createdUsers[$user]["displayname"] = $displayName;
 	}
 
 	/**
